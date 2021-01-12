@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/gurjeetsinghvirdee/Berlywud/issues"
   },
-  "homepage": "https://github.com/gurjeetsinghvirdee/Berlywud#readme"
+  "homepage": "https://github.com/gurjeetsinghvirdee/Berlywud#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
