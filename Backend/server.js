@@ -1,11 +1,17 @@
-import React from 'react'
+const express = require('express');
+const product = require('./product.json')
 
-function server() {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+const app = express()
+const port = process.env.PORT || 5000
 
-export default server
+app.get('/',(req,res) => {
+    res.send('Server is ready')
+})
+
+app.get('/api/products',(req,res) => {
+    res.json(product)
+})
+
+app.listen(port,() => {
+    console.log(`server is up at port ${port}`)
+})
