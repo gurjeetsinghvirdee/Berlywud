@@ -2,6 +2,7 @@ import React from 'react'
 import './Navbar.css'
 import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
+import logoblack from '../src/Images/blacklogo2025.png'
 
 function Navbar() {
     const {Basket} = useSelector(state=>state)
@@ -9,7 +10,7 @@ function Navbar() {
         <div className="navbar">
             <Link className="navbar__link" style={{color: 'inherit', textDecoration: 'inherit'}} to="/">
             <div className="navbar__logo">
-                <img src="logos\final black 2025 logo.png" alt=""/>
+                <img src={logoblack} alt="logo"/>
             </div>
             </Link>
             <div className="navbar__option">

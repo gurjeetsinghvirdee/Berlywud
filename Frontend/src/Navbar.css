@@ -44,9 +44,9 @@
 .bag-link{
     text-decoration: none;
 }
-@media only screen and (max-width: 1300px){
+@media only screen and (max-width: 1000px){
     .navbar__logo>img{
-        width: 20em;
+        width: 18em;
     }
     .navbar__option>nav>a{
         font-size: 1.1em;
