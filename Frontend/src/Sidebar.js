@@ -6,7 +6,8 @@ import {useSelector} from 'react-redux'
 function Sidebar() {
     const AllProducts = useSelector(state => state.AllProducts) 
     const {allProducts} = AllProducts
-    const [brands,setBrands] = useState([])
+   
+   const [brands,setBrands] = useState([])
     
    function handleChange(event){
     const {checked,value} = event.target

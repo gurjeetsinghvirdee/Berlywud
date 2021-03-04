@@ -1,28 +1,25 @@
-import {ALL_PRODUCTS_REQUEST, ALL_PRODUCTS_SUCCESS, ALL_PRODUCTS_FAIL, 
-        PRODUCTS_DETAILS_REQUEST, PRODUCTS_DETAILS_SUCCESS, PRODUCTS_DETAILS_FAIL} from '../constants/allProductConstants';
+import  { ALL_PRODUCTS_REQUEST ,ALL_PRODUCTS_SUCCESS, ALL_PRODUCTS_FAIL,
+    PRODUCT_DETAILS_REQUEST,PRODUCT_DETAILS_SUCCESS,PRODUCT_DETAILS_FAIL } from '../constants/allProductConstants'
 import axios from 'axios'
 
-
-// allProductsload action
-export const allProductsload = () => async(dispatch) => {
-    dispatch({
-        type: ALL_PRODUCTS_REQUEST
-    })
+// allProductsLoad Action
+export const allProductsLoad = () => async(dispatch) =>{
+    dispatch({type: ALL_PRODUCTS_REQUEST})
     try{
         const {data} = await axios.get('/api/products')
-        dispatch({type: ALL_PRODUCTS_SUCCESS ,payload: data})
+        dispatch({ type: ALL_PRODUCTS_SUCCESS, payload : data})
     }catch(error){
-        dispatch({type: ALL_PRODUCTS_FAIL ,payload: error.message})
+        dispatch({ type: ALL_PRODUCTS_FAIL, payload : error.message})
     }
 }
 
-// productDEtails action
-export const productDetails = (productId) => async (dispatch) => {
-    dispatch({type: PRODUCTS_DETAILS_REQUEST,payload: productId})
+//productDetails Action
+export const productDetails = (productId) => async(dispatch) =>{
+    dispatch({type: PRODUCT_DETAILS_REQUEST, payload: productId})
     try{
         const {data} = await axios.get(`/api/products/${productId}`)
-        dispatch({type: PRODUCTS_DETAILS_SUCCESS ,payload: data})    
+        dispatch({type: PRODUCT_DETAILS_SUCCESS, payload: data})
     }catch(error){
-        dispatch({type: PRODUCTS_DETAILS_FAIL, payload: error.response && error.response.data.message ? error.response.data.message : error.message})
+        dispatch({type: PRODUCT_DETAILS_FAIL , payload: error.response && error.response.data.message ? error.response.data.message : error.message})
     }
 }

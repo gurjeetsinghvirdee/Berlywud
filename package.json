@@ -4,22 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch backend --exec node --experimental-modules Backend/server.js"
+    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gurjeetsinghvirdee/Berlywud.git"
+    "url": "git+https://github.com/mannywebdev/Berlywud.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gurjeetsinghvirdee/Berlywud/issues"
+    "url": "https://github.com/mannywebdev/Berlywud/issues"
   },
-  "homepage": "https://github.com/gurjeetsinghvirdee/Berlywud#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
+  "homepage": "https://github.com/mannywebdev/Berlywud#readme",
   "devDependencies": {
     "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "mongoose": "^5.11.13"
   }
 }

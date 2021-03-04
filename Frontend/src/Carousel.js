@@ -8,7 +8,7 @@ import { brown, grey, red } from '@material-ui/core/colors';
 
 function Carousel() {
 
-    const carouselArray=[<CarouselItem src={"logos/i4.png"}/>,<CarouselItem src={"logos/i2.png"}/>,<CarouselItem src={"logos/i3.png"}/>,<CarouselItem src={"logos/i1.png"}/>]
+    const carouselArray=[<CarouselItem src={"logos/i1.png"}/>,<CarouselItem src={"logos/i2.png"}/>,<CarouselItem src={"logos/i3.png"}/>,<CarouselItem src={"logos/i4.png"}/>]
     const [x,setX] =useState(0)
     function goLeft(){
         console.log(x)

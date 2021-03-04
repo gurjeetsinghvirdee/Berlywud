@@ -1,5 +1,5 @@
-import React from 'react';
-import './Errormsg.css';
+import React from 'react'
+import './Errormsg.css'
 
 function Errormsg(props) {
     return (

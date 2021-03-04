@@ -1,26 +1,40 @@
-const express = require('express');
+const express = require('express')
 const product = require('./product.json')
+const mongoose = require('mongoose')
+const userRouter = require('./routers/user')
 
 const app = express()
 const port = process.env.PORT || 5000
-
-app.get('/',(req,res) => {
-    res.send('Server is ready')
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/berlywud',{
+    useNewUrlParser:true,
+    useCreateIndex:true,
+    useUnifiedTopology: true
 })
 
-app.get('/api/products',(req,res) => {
+app.use('/api/users',userRouter)
+
+
+app.get('/',(req,res) =>{
+    res.send('Server is Ready')
+})
+
+app.get('/api/products',(req,res)=>{
     res.json(product)
 })
 
-app.get('/api/products/:id',(req,res) => {
-    const productdetail = product.find((item)=> item.id === req.params.id )
-    if (productdetail){
+app.get('/api/products/:id',(req,res)=>{
+    const productdetail = product.find((item)=> item.id === req.params.id)
+    if(productdetail){
         res.send(productdetail)
-    }else {
-        res.status(404).send({message: "Product not found"})
+    }else{
+        res.status(404).send({ message:"Product Not Found"})
     }
 })
 
-app.listen(port,() => {
+app.use((err,req,res,next)=>{
+    res.status(500).send({message : err.message})
+})
+
+app.listen(port,()=>{
     console.log(`server is up at port ${port}`)
 })

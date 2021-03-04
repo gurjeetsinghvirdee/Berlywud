@@ -1,7 +1,7 @@
-.errormsg {
-    text-align: center;
-    font-weight: 400;
+
+.errormsg{
+    background-color: bisque;
+    padding: 0.5em 1em;
     color: #545454;
-    background-color: #F0E68C;
-    padding: .8em 0;
+    text-align: center;
 }
