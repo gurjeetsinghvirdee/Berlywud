@@ -9,7 +9,6 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Productmain from './Productmain'
 
 function App() {
- 
   
   return(
     <BrowserRouter>

@@ -1,11 +1,10 @@
 import React from 'react';
 import './Errormsg.css';
-import servererror from './Images/500.png'
 
-function Errormsg() {
+function Errormsg(props) {
     return (
-        <div>
-            <img className="errormsg" src={servererror}/>
+        <div className="errormsg">
+            {props.children}
         </div>
     )
 }

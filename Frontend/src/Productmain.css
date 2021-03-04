@@ -12,8 +12,8 @@
 }
 .productmain__img >img{
     margin: 2em 0.5em 1em 0.5em;
-    width: 24em;
-    height: 32em;
+    width: 22em;
+    height: 30em;
     border: 1px solid rgba(211,211,211,0.5);
     object-fit: contain;	
 }
@@ -105,9 +105,6 @@
     font-size: 1em;
     margin: 0.8em 0;
     color: #505050;
-}
-.productmain__productdetails>h3{
-    
 }
 
 
