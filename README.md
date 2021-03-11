@@ -1,4 +1,2 @@
 <h1>Berlywud</h1>
-<p>This app will demonstrate a basic cart management system,<br> 
-as well as a simple method of handling user authentication.<br> 
-We had use of redux for state management and Node JS for backend.</p>
+<p>This app will demonstrate a basic cart management system & simple method of handling user authentication.</p>
