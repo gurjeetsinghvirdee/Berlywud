@@ -1,2 +1,2 @@
 <h1>Berlywud</h1>
-<p>This app will demonstrate a basic cart management system.</p>
+<h4>This app will demonstrate a basic cart management system.</h4>
