@@ -1,0 +1,44 @@
+.rates{
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    text-align: right;
+}
+table{
+    width: 100%;
+    
+}
+.subtotal{
+    border: 1px solid #e7e7e7;
+    padding: 1em;
+    border-radius: 3px;
+    min-width: 18em;
+}
+table> tr > td{
+    padding: 0.3em 0;
+    font-weight: 300;
+}
+.bt{
+    border-top: 1px solid #e7e7e7;
+}
+.subtotal h4{
+    margin: 5px 0 10px 0;
+    color: #57534a;
+    font-weight: 500;
+}
+table>tr>th{
+    text-align: left;
+}
+.subtotal__button > Button{
+    background-color: #ff3e6c;
+    color: #ffffff;
+    font-size: 1em;
+    padding: 0.4em ;
+    margin-top: 0.5em;
+    border-radius: 4px;
+    display: block;
+    font-weight: 300;
+    width: 100%;
+}
+.subtotal__button > Button:hover{
+    background-color: #ff3e6be8;
+}
