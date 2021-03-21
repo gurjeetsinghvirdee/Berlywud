@@ -42,7 +42,7 @@ function Navbar() {
                     <a href="#mens">Men</a>
                     <a href="#womens">Women</a>
                     <a href="#unisex">Unisex</a>
-                    <a href="#decantssplits">Decants  Splits</a>
+                    <a href="#decantssplits">Decants & Splits</a>
                     <a href="#miniatures">Miniatures</a>
                 </nav>
             </div>
