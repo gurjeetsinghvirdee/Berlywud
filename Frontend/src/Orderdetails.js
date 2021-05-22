@@ -6,6 +6,7 @@ import Errormsg from './Errormsg'
 import Loadingmsg from './Loadingmsg'
 import './Payment.css'
 import { detailsOrder } from './redux/actions/orderActions'
+// import {ourlogo} from '.src/images/greylogo2025.png'
 
 const loadRazorpay= (src)=>{
     return new Promise((resolve)=>{
@@ -28,11 +29,14 @@ function Orderdetails() {
     const params = useParams()
     const orderId = params.id
     
-
     const OrderDetails = useSelector((state) => state.OrderDetails);
     const { order, loading, error } = OrderDetails;
 
+    const orderPay = useSelector((state) => state.orderPay);
+    const { loading: loadingPay, error: errorPay, success: successPay,} = orderPay;
+
     useEffect(() => {
+        if(!order || successPay || (order && order._id != orderId))
         dispatch(detailsOrder(orderId))
     }, [dispatch,orderId]);
 
@@ -46,11 +50,11 @@ function Orderdetails() {
         }
         const options = {
             "key": __DEV__ ? "rzp_test_tjgqJf8OgEA215" : process.env.RZP_PUBLIC_KEY, 
-            "amount": "100", //100paise = 1rs / Paying 5 rs
+            "amount": order.totalPrice*100, //100paise = 1rs / Paying 5 rs
             "currency": "INR",
             "name": "Berlywud",
             "description": "Feed Your Senses",
-            "image": "./images/greylogo2025.png",
+            "image": "images/greylogo2025.png",
              //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response){
                 alert(response.razorpay_payment_id);
@@ -58,8 +62,8 @@ function Orderdetails() {
                 alert(response.razorpay_signature)
             },
             "prefill": {
-                "name": "Gaurav Kumar",
-                "email": "gaurav.kumar@example.com",
+                "name": "Xyz",
+                "email": "@gmail.com",
                 "contact": "9999999999"
             }
         };
