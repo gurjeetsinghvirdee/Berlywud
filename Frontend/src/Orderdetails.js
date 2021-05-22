@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import Errormsg from './Errormsg'
 import Loadingmsg from './Loadingmsg'
 import './Payment.css'
-import { detailsOrder } from './redux/actions/orderActions'
+import { detailsOrder, payOrder } from './redux/actions/orderActions'
 // import {ourlogo} from '.src/images/greylogo2025.png'
 
 const loadRazorpay= (src)=>{
@@ -36,7 +36,7 @@ function Orderdetails() {
     const { loading: loadingPay, error: errorPay, success: successPay,} = orderPay;
 
     useEffect(() => {
-        if(!order || successPay || (order && order._id != orderId))
+        if(!order || successPay || (order && order._id !== orderId))
         dispatch(detailsOrder(orderId))
     }, [dispatch,orderId]);
 
@@ -54,7 +54,7 @@ function Orderdetails() {
             "currency": "INR",
             "name": "Berlywud",
             "description": "Feed Your Senses",
-            "image": "images/greylogo2025.png",
+            "image": "http://localhost:5000/berlywud.png",
              //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response){
                 alert(response.razorpay_payment_id);
@@ -69,6 +69,10 @@ function Orderdetails() {
         };
         var paymentObject = new window.Razorpay(options);
         paymentObject.open()
+    }
+
+    const successPaymentHandler = (paymentResult) => {
+        dispatch(payOrder(order, paymentResult));
     }
 
     return loading ? (

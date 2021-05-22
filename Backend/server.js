@@ -4,6 +4,7 @@ const userRouter = require('./routers/user.js')
 const productRouter = require('./routers/product.js')
 const orderRouter = require('./routers/orderRouter.js')
 const dotenv = require('dotenv')
+const path = require('path')
 
 dotenv.config()
 
@@ -26,6 +27,12 @@ app.get('/',(req,res) =>{
     res.send('Server is Ready')
 })
 
+
+// Payment Logo
+
+app.get('/berlywud.png',(req,res) =>{
+    res.sendFile(path.join(__dirname, '/logo-removebg-preview.png'))
+})
 
 
 // app.get('/api/products/:id',(req,res)=>{
