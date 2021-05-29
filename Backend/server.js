@@ -5,12 +5,30 @@ const productRouter = require('./routers/product.js')
 const orderRouter = require('./routers/orderRouter.js')
 const dotenv = require('dotenv')
 const path = require('path')
+const Razorpay = require('razorpay')
+const nanoid = require('nanoid')
 
 dotenv.config()
+
+const razorpayPublicKey = "rzp_test_tjgqJf8OgEA215"
+const razorpaySecretKey = "0wIdYCiuPh7ydfOwhvTKyKEP"
+
+console.log(` razorpayPublicKey`,  razorpayPublicKey)
+console.log(` razorpaySecretKey`, razorpaySecretKey)
+
+var instance = new Razorpay({
+    key_id: razorpayPublicKey,
+    key_secret: razorpaySecretKey
+});
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended : true}))
+
+const data = await fetch('http://localhost:5000/razorpay', {method: 'POST'}).then((response)=> 
+    res.json()
+) 
+console.log(`data`, data)
 
 const port = process.env.PORT || 5000
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/berlywud',{
@@ -32,6 +50,15 @@ app.get('/',(req,res) =>{
 
 app.get('/berlywud.png',(req,res) =>{
     res.sendFile(path.join(__dirname, '/logo-removebg-preview.png'))
+})
+
+app.post('/razorpay', async (req,res) =>{
+    var option = {  
+        receipt: nanoid() 
+    };
+    instance.orders.create(options, function(err, order) {  
+        console.log(order);
+    });
 })
 
 
