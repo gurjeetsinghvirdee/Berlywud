@@ -25,11 +25,6 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended : true}))
 
-const data = await fetch('http://localhost:5000/razorpay', {method: 'POST'}).then((response)=> 
-    res.json()
-) 
-console.log(`data`, data)
-
 const port = process.env.PORT || 5000
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/berlywud',{
     useNewUrlParser:true,
@@ -53,8 +48,8 @@ app.get('/berlywud.png',(req,res) =>{
 })
 
 app.post('/razorpay', async (req,res) =>{
-    var option = {  
-        receipt: nanoid() 
+    var options = {  
+        receipt: "njfkff"
     };
     instance.orders.create(options, function(err, order) {  
         console.log(order);

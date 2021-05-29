@@ -48,6 +48,10 @@ function Orderdetails() {
             alert('Razorpay Sdk failed to load...')
             return
         }
+        const data = await fetch('http://localhost:5000/razorpay', {method: 'POST'}).then((response)=> 
+            res.json()
+        )
+        console.log(`data`, data)
         const options = {
             "key": __DEV__ ? "rzp_test_tjgqJf8OgEA215" : process.env.RZP_PUBLIC_KEY, 
             "amount": order.totalPrice*100, //100paise = 1rs / Paying 5 rs
