@@ -48,17 +48,29 @@ function Orderdetails() {
             alert('Razorpay Sdk failed to load...')
             return
         }
-        const data = await fetch('http://localhost:5000/razorpay', {method: 'POST'}).then((response)=> 
-            res.json()
-        )
-        console.log(`data`, data)
+        
+        const data= {
+            amount:(order.totalPrice*100).toString(),
+        }
+        
+        const option={
+            method: 'POST',
+            headers : {
+                'Content-Type': 'application/json'
+            },
+            body : JSON.stringify(data)
+        };
+        const razorpayorder =  await fetch('http://localhost:5000/razorpay',option).then((t)=>t.json())
+        console.log('razorpayorder',razorpayorder)
+
         const options = {
             "key": __DEV__ ? "rzp_test_tjgqJf8OgEA215" : process.env.RZP_PUBLIC_KEY, 
-            "amount": order.totalPrice*100, //100paise = 1rs / Paying 5 rs
+            "amount": razorpayorder.amount, //100paise = 1rs / Paying 5 rs
             "currency": "INR",
             "name": "Berlywud",
             "description": "Feed Your Senses",
             "image": "http://localhost:5000/berlywud.png",
+            "order_id": razorpayorder.id,
              //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response){
                 alert(response.razorpay_payment_id);
@@ -67,8 +79,8 @@ function Orderdetails() {
             },
             "prefill": {
                 "name": "Xyz",
-                "email": "@gmail.com",
-                "contact": "9999999999"
+                "email": "gurjeetsinghvirdee@gmail.com",
+                "contact": "9009191209"
             }
         };
         var paymentObject = new window.Razorpay(options);

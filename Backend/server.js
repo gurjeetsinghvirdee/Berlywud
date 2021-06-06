@@ -5,21 +5,20 @@ const productRouter = require('./routers/product.js')
 const orderRouter = require('./routers/orderRouter.js')
 const dotenv = require('dotenv')
 const path = require('path')
-const Razorpay = require('razorpay')
+const Razorpay= require('razorpay')
 const nanoid = require('nanoid')
 
 dotenv.config()
 
 const razorpayPublicKey = "rzp_test_tjgqJf8OgEA215"
 const razorpaySecretKey = "0wIdYCiuPh7ydfOwhvTKyKEP"
-
-console.log(` razorpayPublicKey`,  razorpayPublicKey)
-console.log(` razorpaySecretKey`, razorpaySecretKey)
-
+console.log(`razorpayPublickey`, razorpayPublicKey)
+console.log(`razorpayPublickey`, razorpaySecretKey)
 var instance = new Razorpay({
     key_id: razorpayPublicKey,
-    key_secret: razorpaySecretKey
-});
+    key_secret: razorpaySecretKey,
+  });
+
 
 const app = express()
 app.use(express.json())
@@ -32,39 +31,37 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/berlywud'
     useUnifiedTopology: true
 })
 
+//Serving Berlywud logo
+app.get('/berlywud.png',(req,res) =>{
+    res.sendFile(path.join(__dirname,"greylogo2025.png"))
+})
+
+app.post('/razorpay',async(req,res) =>{
+    try{
+        console.log(req.body)
+        const response = await instance.orders.create({
+            amount: req.body.amount,
+            reciept: req.body.reciept
+        });
+        res.json({
+            id: response.id,
+            amount : response.amount
+        })
+    }catch(error){
+        console.log(error)
+    }
+})
+
+
 app.use('/api/users',userRouter)
 app.use('/api/products',productRouter)
 app.use('/api/orders', orderRouter);
 
+
+
 app.get('/',(req,res) =>{
     res.send('Server is Ready')
 })
-
-
-// Payment Logo
-
-app.get('/berlywud.png',(req,res) =>{
-    res.sendFile(path.join(__dirname, '/logo-removebg-preview.png'))
-})
-
-app.post('/razorpay', async (req,res) =>{
-    var options = {  
-        receipt: "njfkff"
-    };
-    instance.orders.create(options, function(err, order) {  
-        console.log(order);
-    });
-})
-
-
-// app.get('/api/products/:id',(req,res)=>{
-//     const productdetail = data.products.find((item)=> item.id === req.params.id)
-//     if(productdetail){
-//         res.send(productdetail)
-//     }else{
-//         res.status(404).send({ message:"Product Not Found"})
-//     }
-// })
 
 app.use((err,req,res,next)=>{
     res.status(500).send({message : err.message})
