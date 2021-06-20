@@ -47,14 +47,14 @@ orderRouter.put(
   restAuth,
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
+    console.log(`req.body`, req.body)
     if (order) {
       order.isPaid = true;
       order.paidAt = Date.now();
       order.paymentResult = {
-        id: req.body.id,
-        status: req.body.status,
-        update_time: req.body.update_time,
-        email_address: req.body.email_address,
+        order_id: req.body.data.orderId,
+        status: req.body.data.msg,
+        payment_id : req.body.data.paymentId
       };
       const updatedOrder = await order.save();
       res.send({ message: 'Order Paid', order: updatedOrder });
@@ -63,5 +63,6 @@ orderRouter.put(
     }
   })
 );
+
 
 module.exports = orderRouter

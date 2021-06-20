@@ -1,4 +1,5 @@
 import { Button } from '@material-ui/core'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
@@ -6,7 +7,7 @@ import Errormsg from './Errormsg'
 import Loadingmsg from './Loadingmsg'
 import './Payment.css'
 import { detailsOrder, payOrder } from './redux/actions/orderActions'
-// import {ourlogo} from '.src/images/greylogo2025.png'
+import { ORDER_PAY_RESET } from './redux/constants/orderConstants'
 
 const loadRazorpay= (src)=>{
     return new Promise((resolve)=>{
@@ -29,16 +30,18 @@ function Orderdetails() {
     const params = useParams()
     const orderId = params.id
     
+
     const OrderDetails = useSelector((state) => state.OrderDetails);
     const { order, loading, error } = OrderDetails;
-
     const orderPay = useSelector((state) => state.orderPay);
-    const { loading: loadingPay, error: errorPay, success: successPay,} = orderPay;
+    const {loading: loadingPay,error: errorPay,success: successPay} = orderPay;
 
     useEffect(() => {
-        if(!order || successPay || (order && order._id !== orderId))
-        dispatch(detailsOrder(orderId))
-    }, [dispatch,orderId]);
+        if(!order || successPay || (order && order._id !== orderId)){
+            dispatch({ type: ORDER_PAY_RESET });
+            dispatch(detailsOrder(orderId))
+        }
+    }, [dispatch,orderId,order,successPay]);
 
     const __DEV__ = document.domain === "localhost"
 
@@ -48,7 +51,9 @@ function Orderdetails() {
             alert('Razorpay Sdk failed to load...')
             return
         }
-        
+        // const data = await fetch('http://localhost:5000/razorpay', {method: 'POST'}).then((response)=> 
+        //     res.json()
+        // ) 
         const data= {
             amount:(order.totalPrice*100).toString(),
         }
@@ -69,27 +74,39 @@ function Orderdetails() {
             "currency": "INR",
             "name": "Berlywud",
             "description": "Feed Your Senses",
-            "image": "http://localhost:5000/berlywud.png",
+            "image": 'http://localhost:5000/berlywud.png',
             "order_id": razorpayorder.id,
              //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            "handler": function (response){
-                alert(response.razorpay_payment_id);
-                alert(response.razorpay_order_id);
-                alert(response.razorpay_signature)
+            "handler": async function (response){
+                // alert(response.razorpay_payment_id);
+                // alert(response.razorpay_order_id);
+                // alert(response.razorpay_signature)
+                const data = {
+                    orderCreationId: razorpayorder.id,
+                    razorpayPaymentId: response.razorpay_payment_id,
+                    razorpayOrderId: response.razorpay_order_id,
+                    razorpaySignature: response.razorpay_signature,
+                }
+                const result = await axios.post("http://localhost:5000/payment/success", data);
+                if(result.data.msg === "success"){
+                    dispatch(payOrder(order,result))
+                }
+
             },
             "prefill": {
-                "name": "Xyz",
-                "email": "gurjeetsinghvirdee@gmail.com",
-                "contact": "9009191209"
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+                
             }
         };
         var paymentObject = new window.Razorpay(options);
         paymentObject.open()
     }
 
-    const successPaymentHandler = (paymentResult) => {
-        dispatch(payOrder(order, paymentResult));
-    }
+    // const successPaymentHandler = (paymentResult) => {
+    //     dispatch(payOrder(order, paymentResult));
+    // };
 
     return loading ? (
                 <Loadingmsg/> 

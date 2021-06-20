@@ -12,6 +12,7 @@ import Register from './Register';
 import Shippingaddress from './Shippingaddress';
 import Payment from './Payment';
 import Orderdetails from './Orderdetails';
+import Orderhistory from './Orderhistory';
 
 function App() {
  
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path="/payment">
             <Payment/>
+          </Route>
+          <Route path="/orderhistory">
+            <Orderhistory/>
           </Route>
           <Route path="/order/:id">
             <Orderdetails/>
