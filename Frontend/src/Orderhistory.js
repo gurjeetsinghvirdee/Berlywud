@@ -6,7 +6,7 @@ import Loadingmsg from './Loadingmsg'
 
 
 export default function Orderhistory(props) {
-  const myOrders = useSelector((state) => state.orderMineList);
+  const myOrders = useSelector((state) => state.MyOrders);
   const { loading, error, orders } = myOrders;
   const dispatch = useDispatch();
   useEffect(() => {
