@@ -2,6 +2,7 @@ const express = require('express')
 const expressAsyncHandler = require('express-async-handler')
 const data = require('../data.js')
 const Product =require('../models/product.js')
+import { isAdmin, isAuth } from '../utils.js';
 
 const productRouter = express.Router()
 
@@ -24,5 +25,7 @@ productRouter.get('/:id',expressAsyncHandler(async(req,res)=>{
         res.status(404).send({message:"Product Not Found"})
     }
 }))
+
+
 
 module.exports = productRouter
