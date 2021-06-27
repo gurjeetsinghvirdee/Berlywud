@@ -5,6 +5,15 @@ const restAuth = require('../utils').restAuth
 
 const orderRouter = express.Router();
 
+orderRouter.get(
+  '/myorder',
+  restAuth,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.user._id});
+    res.send(orders);
+  })
+);
+
 orderRouter.post(
   '/',
   restAuth,
@@ -63,6 +72,7 @@ orderRouter.put(
     }
   })
 );
+
 
 
 module.exports = orderRouter

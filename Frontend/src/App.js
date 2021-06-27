@@ -6,6 +6,7 @@ import Home from './Home'
 import Cart from './Cart';
 import Footer from './Footer'
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
+import PrivateRoute from './PrivateRoute';
 import Productmain from './Productmain'
 import Signin from './Signin';
 import Register from './Register';
@@ -13,6 +14,7 @@ import Shippingaddress from './Shippingaddress';
 import Payment from './Payment';
 import Orderdetails from './Orderdetails';
 import Orderhistory from './Orderhistory';
+import Myprofile from '../src/Myprofile';
 
 function App() {
  
@@ -54,6 +56,10 @@ function App() {
           <Route path="/register">
             <Register/>
           </Route>
+          <PrivateRoute
+            path="/profile"
+            component={Myprofile}
+          ></PrivateRoute>
         </Switch>
         </main> 
       </div>
