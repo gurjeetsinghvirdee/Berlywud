@@ -17,6 +17,7 @@ import Orderhistory from './Orderhistory';
 import Myprofile from '../src/Myprofile';
 import ProductList from './ProductList';
 import AdminRoute from './AdminRoute';
+import ProductEdit from './ProductEdit';
 
 function App() {
  
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route exact path="/productpage/:productId">
             <Productmain/>
+          </Route>
+          <Route exact path="/productpage/:productId/edit">
+            <ProductEdit/>
           </Route>
           <Route path="/shipping">
             <Shippingaddress/>
