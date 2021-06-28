@@ -2,7 +2,8 @@ const express = require('express')
 const expressAsyncHandler = require('express-async-handler')
 const data = require('../data.js')
 const Product =require('../models/product.js')
-import { isAdmin, isAuth } from '../utils.js';
+const restAuth = require('../utils.js').restAuth
+const isAdmin = require('../utils.js').isAdmin
 
 const productRouter = express.Router()
 

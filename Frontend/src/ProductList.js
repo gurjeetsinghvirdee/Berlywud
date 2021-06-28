@@ -5,6 +5,7 @@ import Loadingmsg from './Loadingmsg'
 import './ProductList.css';
 import { allProductsLoad, createProduct } from './redux/actions/allProductsActions';
 import { PRODUCT_CREATE_RESET } from './redux/constants/allProductConstants';
+import Button from '@material-ui/core/Button';
 
 export default function ProductList(props) {
   const productList = useSelector((state) => state.AllProducts);
@@ -32,11 +33,14 @@ export default function ProductList(props) {
 
   return (
     <div className="productlist">
-      <div className="row">
+      <div className="productlist__header">
         <h1>Products</h1>
-        <button type="button" className="primary" onClick={createHandler}>
-          Create Product
-        </button>
+        <div className="pink__button">
+          <Button type="button" onClick={createHandler}>
+            Create Product
+          </Button>
+        </div>
+        
       </div>
       {loadingCreate && <Loadingmsg/>}
       {errorCreate && <Errormsg variant="danger">{errorCreate}</Errormsg>}

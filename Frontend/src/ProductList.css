@@ -1,4 +1,9 @@
 .productlist {
-    margin: 0 4%;
+    margin: 0 4% 4% 4%;
 }
 
+.productlist__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
