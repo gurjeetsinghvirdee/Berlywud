@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './ProductEdit.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { productDetails } from './redux/actions/allProductsActions';
+import { productDetails, updateProduct } from './redux/actions/allProductsActions';
 import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Errormsg from './Errormsg'
 import Loadingmsg from './Loadingmsg'
 import { useParams } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +35,7 @@ export default function ProductEdit(props) {
   const [launch, setLaunch] = useState('');
   const [concentration, setConcentration] = useState('');
   const [rating, setRating] = useState('');
-  const [review, setReview] = useState('');
+  const [reviews, setReviews] = useState('');
   const [stockcount, setStockcount] = useState('');
   const [twoml,setTwoml] = useState('');
   const [fiveml,setFiveml] = useState('');
@@ -50,7 +53,7 @@ export default function ProductEdit(props) {
   const [basenote3, setBasenote3] = useState('');
 
   const ProductDetails = useSelector((state) => state.ProductDetails);
-  const { loading, error, product } = productDetails;
+  const { loading, error, product } = ProductDetails;
   const dispatch = useDispatch();
   useEffect(() => {
     if (!product || product._id !== productId) {
@@ -65,7 +68,7 @@ export default function ProductEdit(props) {
         setLaunch(product.launch);
         setConcentration(product.concentration);
         setRating(product.rating);
-        setReview(product.review);
+        setReviews(product.reviews);
         setStockcount(product.stockcount);
         setTwoml(product.decantprice["2ml"])
         setFiveml(product.decantprice["5ml"])
@@ -86,11 +89,17 @@ export default function ProductEdit(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     // TODO: dispatch update product
+    dispatch(updateProduct({_id:productId, brand, title, url, description, origprice, gender, launch, concentration, rating, reviews, stockcount, twoml, fiveml, tenml, thirtyml, retail, topnote1, topnote2, topnote3, middlenote1, middlenote2, middlenote3, basenote1, basenote2, basenote3}))
   };
   return (
     <div className="productedit">
-      <div>
+      <div className="productlist__header">
           <h2 style={{color: "black"}}>Edit Product {productId}</h2>
+          <div className="pink__button">
+          <Button type="button">
+            Update Product
+          </Button>
+        </div>
       </div>
       <form className={classes.root} noValidate autoComplete="off"  onSubmit={submitHandler}>
         {loading ? (
@@ -169,6 +178,7 @@ export default function ProductEdit(props) {
                 required
                 label="Description"
                 color="secondary"
+                value={description}
                 multiline
                 rows={4}
                 variant="outlined"
@@ -344,9 +354,9 @@ export default function ProductEdit(props) {
                 required
                 variant="outlined"
                 label="Review"
-                value={review}
+                value={reviews}
                 color="secondary"
-                onChange={(e) => setReview(e.target.value)}
+                onChange={(e) => setReviews(e.target.value)}
             />
           </>
         )}
