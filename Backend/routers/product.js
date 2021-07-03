@@ -63,19 +63,37 @@ productRouter.post('/',restAuth,isAdmin,expressAsyncHandler(async (req, res) => 
       const productId = req.params.id;
       const product = await Product.findById(productId);
       console.log(`req.body`, req.body)
-    //   if (product) {
-    //     product.brand = req.body.brand;
-    //     product.title = req.body.title;
-    //     product.image = req.body.image;
-    //     product.category = req.body.category;
-    //     product.brand = req.body.brand;
-    //     product.countInStock = req.body.countInStock;
-    //     product.description = req.body.description;
-    //     const updatedProduct = await product.save();
-    //     res.send({ message: 'Product Updated', product: updatedProduct });
-    //   } else {
-    //     res.status(404).send({ message: 'Product Not Found' });
-    //   }
+      if (product) {
+        product.brand = req.body.brand;
+        product.title = req.body.title;
+        product.url = req.body.url;
+        product.description = req.body.description;
+        product.origprice = req.body.origprice;
+        product.gender = req.body.gender;
+        product.launch = req.body.launch;
+        product.concentration = req.body.concentration,
+        product.rating = req.body.rating,
+        product.reviews = req.body.reviews
+        product.stockcount = req.body.stockcount
+        product.decantprice["2ml"] = req.body.twoml
+        product.decantprice["5ml"] = req.body.fiveml
+        product.decantprice["10ml"] = req.body.tenml
+        product.decantprice["30ml"] = req.body.thirtyml
+        product.decantprice[Retail] = req.body.retail
+        product.notes.Topnotes[0] = req.body.topnote1
+        product.notes.Topnotes[1] = req.body.topnote2
+        product.notes.Topnotes[2] = req.body.topnote3
+        product.notes.Middlenotes[0] = req.body.middlenote1
+        product.notes.Midddlenotes[1] = req.body.midddlenote2
+        product.notes.Middlenotes[2] = req.body.middlenote3
+        product.notes.Basenotes[0] = req.body.basenote1
+        product.notes.Basenotes[1] = req.body.basenote2
+        product.notes.Basenotes[2] = req.body.basenote3
+        const updatedProduct = await product.save();
+        res.send({ message: 'Product Updated', product: updatedProduct });
+      } else {
+        res.status(404).send({ message: 'Product Not Found' });
+      }
     })
   );
   

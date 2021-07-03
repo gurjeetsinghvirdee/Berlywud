@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import './ProductEdit.css';
 import { useDispatch, useSelector } from 'react-redux';
+import './ProductEdit.css'
 import { productDetails, updateProduct } from './redux/actions/allProductsActions';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Errormsg from './Errormsg'
 import Loadingmsg from './Loadingmsg'
 import { useParams } from 'react-router-dom';
-
-
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button'
+import { PRODUCT_UPDATE_RESET } from './redux/constants/allProductConstants';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      margin: theme.spacing(1)
-    }
+      margin: theme.spacing(1),
+    },
   },
 }));
 
@@ -54,10 +53,19 @@ export default function ProductEdit(props) {
 
   const ProductDetails = useSelector((state) => state.ProductDetails);
   const { loading, error, product } = ProductDetails;
+
+  const productUpdate = useSelector((state) => state.ProductUpdate);
+  const {loading: loadingUpdate,error: errorUpdate,success: successUpdate,} = productUpdate;
+
+  console.log(`product`, product)
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!product || product._id !== productId) {
-      dispatch(productDetails(productId));
+    if (successUpdate) {
+        props.history.push('/productlist');
+    }
+    if (!product || product._id !== productId || successUpdate) {
+        dispatch({ type: PRODUCT_UPDATE_RESET });
+        dispatch(productDetails(productId));
     } else {
         setBrand(product.brand);
         setTitle(product.title);
@@ -85,7 +93,7 @@ export default function ProductEdit(props) {
         setBasenote2(product.notes.Basenotes[1])
         setBasenote3(product.notes.Basenotes[2])
     }
-  }, [product, dispatch, productId]);
+  }, [product, dispatch, productId, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
     // TODO: dispatch update product
@@ -94,14 +102,17 @@ export default function ProductEdit(props) {
   return (
     <div className="productedit">
       <div className="productlist__header">
-          <h2 style={{color: "black"}}>Edit Product {productId}</h2>
-          <div className="pink__button">
-          <Button type="button">
-            Update Product
-          </Button>
-        </div>
+        <h2 style={{color:"black"}}>Edit Product {productId}</h2>
+        
       </div>
       <form className={classes.root} noValidate autoComplete="off"  onSubmit={submitHandler}>
+        <div className="pink__button">
+            <button className="pink__button" type="submit">
+              Update Product
+            </button>
+        </div>
+        {loadingUpdate &&  <Loadingmsg/>}
+        {errorUpdate && <Errormsg variant="danger">{error}</Errormsg>}
         {loading ? (
         <Loadingmsg/>
       ) : error ? (
@@ -110,23 +121,23 @@ export default function ProductEdit(props) {
           <>
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined" 
                 label="Brand"
-                value={brand}
                 color="secondary"
+                variant="outlined"
+                required
+                value={brand}
                 onChange={(e) => setBrand(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
                 label="Title"
-                value={title}
                 color="secondary"
+                variant="outlined"
+                required
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
             />
-            <TextField 
+            <TextField
                 id="outlined-basic"
                 required
                 variant="outlined"
@@ -135,7 +146,7 @@ export default function ProductEdit(props) {
                 color="secondary"
                 onChange={(e) => setGender(e.target.value)}
             />
-             <TextField 
+            <TextField
                 id="outlined-basic"
                 required
                 variant="outlined"
@@ -144,7 +155,7 @@ export default function ProductEdit(props) {
                 color="secondary"
                 onChange={(e) => setLaunch(e.target.value)}
             />
-             <TextField 
+            <TextField
                 id="outlined-basic"
                 required
                 variant="outlined"
@@ -153,7 +164,7 @@ export default function ProductEdit(props) {
                 color="secondary"
                 onChange={(e) => setConcentration(e.target.value)}
             />
-            <TextField 
+            <TextField
                 id="outlined-basic"
                 required
                 variant="outlined"
@@ -163,199 +174,193 @@ export default function ProductEdit(props) {
                 onChange={(e) => setStockcount(e.target.value)}
             />
             <TextField 
-                id="outlined-basic"
+                id="outlined-basic" 
+                label="Image Url"
+                color="secondary"
+                variant="outlined"
                 fullWidth
                 required
-                variant="outlined" 
-                label="Image Url"
                 value={url}
-                color="secondary"
                 onChange={(e) => setUrl(e.target.value)}
             />
+            
             <TextField 
                 id="outlined-multiline-static"
-                fullWidth
-                required
                 label="Description"
                 color="secondary"
-                value={description}
                 multiline
+                fullWidth
                 rows={4}
                 variant="outlined"
+                required
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
             />
-            
             <div>
-              <h3>Notes</h3>
+                <h3>Notes</h3>
             </div>
-
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Top Note 1"
-                value={topnote1}
+                label="Topnote1"
                 color="secondary"
+                variant="outlined"
+                required
+                value={topnote1}
                 onChange={(e) => setTopnote1(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Top Note 2"
-                value={topnote2}
+                label="Topnote2"
                 color="secondary"
+                variant="outlined"
+                required
+                value={topnote2}
                 onChange={(e) => setTopnote2(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Top Note 3"
-                value={topnote3}
+                label="Topnote3"
                 color="secondary"
+                variant="outlined"
+                required
+                value={topnote3}
                 onChange={(e) => setTopnote3(e.target.value)}
             />
-
             <br/>
-
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Middle Note 1"
-                value={middlenote1}
+                label="Middlenote 1"
                 color="secondary"
+                variant="outlined"
+                required
+                value={middlenote1}
                 onChange={(e) => setMiddlenote1(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Middle Note 2"
-                value={middlenote2}
+                label="Middlenote2"
                 color="secondary"
+                variant="outlined"
+                required
+                value={middlenote2}
                 onChange={(e) => setMiddlenote2(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Middle Note 3"
-                value={middlenote3}
+                label="Middlenote3"
                 color="secondary"
+                variant="outlined"
+                required
+                value={middlenote3}
                 onChange={(e) => setMiddlenote3(e.target.value)}
             />
-
             <br/>
-
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Base Note 1"
-                value={basenote1}
+                label="Basenote 1"
                 color="secondary"
+                variant="outlined"
+                required
+                value={basenote1}
                 onChange={(e) => setBasenote1(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Base Note 2"
-                value={basenote2}
+                label="Basenote2"
                 color="secondary"
+                variant="outlined"
+                required
+                value={basenote2}
                 onChange={(e) => setBasenote2(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Base Note 3"
-                value={basenote3}
+                label="Basenote3"
                 color="secondary"
+                variant="outlined"
+                required
+                value={basenote3}
                 onChange={(e) => setBasenote3(e.target.value)}
             />
             <div>
-              <h3>Price</h3>
+                <h3>Price</h3>
             </div>
-
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Retail Discounted Price"
-                value={retail}
+                label="Retail disconted price"
                 color="secondary"
+                variant="outlined"
+                required
+                value={retail}
                 onChange={(e) => setRetail(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="2ml Price"
-                value={twoml}
+                label="2ml price"
                 color="secondary"
+                variant="outlined"
+                required
+                value={twoml}
                 onChange={(e) => setTwoml(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
                 label="5ml Price"
-                value={fiveml}
                 color="secondary"
+                variant="outlined"
+                required
+                value={fiveml}
                 onChange={(e) => setFiveml(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="10ml Price"
-                value={tenml}
+                label="10ml price"
                 color="secondary"
+                variant="outlined"
+                required
+                value={tenml}
                 onChange={(e) => setTenml(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="30ml Price"
-                value={thirtyml}
+                label="30ml price"
                 color="secondary"
+                variant="outlined"
+                required
+                value={thirtyml}
                 onChange={(e) => setThirtyml(e.target.value)}
             />
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
                 label="Retail Price"
-                value={origprice}
                 color="secondary"
+                variant="outlined"
+                required
+                value={origprice}
                 onChange={(e) => setOrigprice(e.target.value)}
             />
             <div>
-              <h3>Rating</h3>
+                <h3>Rating</h3>
             </div>
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
                 label="Rating"
-                value={rating}
                 color="secondary"
+                variant="outlined"
+                required
+                value={rating}
                 onChange={(e) => setRating(e.target.value)}
             />
             <div>
-              <h3>Review</h3>
+                <h3>Reviews</h3>
             </div>
             <TextField 
                 id="outlined-basic"
-                required
-                variant="outlined"
-                label="Review"
-                value={reviews}
+                label="Retail Price"
                 color="secondary"
+                variant="outlined"
+                required
+                value={reviews}
                 onChange={(e) => setReviews(e.target.value)}
             />
           </>
