@@ -26,7 +26,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended : true}))
 
 const port = process.env.PORT || 5000
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/berlywud',{
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/berlywud',{
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology: true

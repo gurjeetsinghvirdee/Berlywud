@@ -27,8 +27,8 @@ const data = {
             "notes":{"Topnotes":["Apple","Green Mandarin"],"Middlenotes":["Orange Blossom","Nutmeg","Carrot Seeds"],"Basenotes":["Suede","Tonka Bean","Vanilla"]},
             "launch":2019,
             "concentration":"Eau de Parfum",
-            "rating":4.3,
-            "reviews": 10,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             },
             {
@@ -42,8 +42,8 @@ const data = {
             "notes":{"Topnotes":["Apple","Pear","Peach"],"Middlenotes":["Rose","Jasmine","Geranium"],"Basenotes":["Sandalwood","Patchouli","Musk"]},
             "launch":2015,
             "concentration":"Eau de Parfum",
-            "rating":4.8,
-            "reviews": 6,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":0
             },
             
@@ -58,8 +58,8 @@ const data = {
             "notes":{"Topnotes":["Bergamot","Lemon","Carambola"],"Middlenotes":["Tarragon","Cedar","Pepper"],"Basenotes":["Musk","Woodsy Notes","Saffron"]},
             "launch":2006,
             "concentration":"Eau de toilette",
-            "rating":3.6,
-            "reviews": 40,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             },
             {
@@ -73,8 +73,8 @@ const data = {
             "notes":{"Topnotes":["Pink Pepper","Cardamom","Bergamot"],"Middlenotes":["Agarwood","Black Hemlock"],"Basenotes":["Cedar","Sandalwood","Vetiver"]},
             "launch":2004,
             "concentration":"Eau de Parfum",
-            "rating":3.9,
-            "reviews": 20,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             },
             {
@@ -88,8 +88,8 @@ const data = {
             "notes":{"Topnotes":["Juniper","Orange Blossom","Clary Sage"],"Middlenotes":["Orchid","Rose","Lily-of-the-valley"],"Basenotes":["Tolu Balsam","Tonka Bean","Amber"]},
             "launch":2002,
             "concentration":"Eau de Parfum",
-            "rating":4,
-            "reviews": 22,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             },
             {
@@ -103,8 +103,8 @@ const data = {
             "notes":{"Topnotes":["Iris"],"Middlenotes":["Patchouli","Amber"],"Basenotes":["Leather","Tonka Bean","Sandalwood"]},
             "launch":2017,
             "concentration":"Eau de Parfum",
-            "rating":5,
-            "reviews": 38,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             },
             {
@@ -118,8 +118,8 @@ const data = {
             "notes":{"Topnotes":["Lemon","Neroli","Bergamot"],"Middlenotes":["Hyacinth","Clary Sage","Cedar"],"Basenotes":["Tonka Bean","Musk","Amber"]},
             "launch":2008,
             "concentration":"Eau de toilette",
-            "rating":3.7,
-            "reviews": 12,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             },
             {
@@ -133,8 +133,8 @@ const data = {
             "notes":{"Topnotes":["Bergamot","Black Pepper","Bay Leaf"],"Middlenotes":["Rum","Woody Notes","Cinnamon"],"Basenotes":["Incense","Leather","Benzoin"]},
             "launch":2013,
             "concentration":"Eau de Parfum",
-            "rating":4.5,
-            "reviews": 33,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             },
             {
@@ -148,8 +148,8 @@ const data = {
             "notes":{"Topnotes":["Water Notes","Calabrian Bergamot","Sicilian Lemon"],"Middlenotes":["Sea Notes","Ambergris","Apple"],"Basenotes":["Benzoin","Vetiver","Sandalwood"]},
             "launch":2017,
             "concentration":"Eau de toilette",
-            "rating":4.6,
-            "reviews": 22,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             },
             {
@@ -163,8 +163,8 @@ const data = {
             "notes":{"Topnotes":["Neroli","Black Pepper","Cardamon"],"Middlenotes":["Iris","Violet","Geranium"],"Basenotes":["Amber","Cedar","Patchouli"]},
             "launch":2016,
             "concentration":" Eau de Parfum",
-            "rating":4.8,
-            "reviews": 10,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             },
             {
@@ -178,8 +178,8 @@ const data = {
             "notes":{"Topnotes":["Patchouli","Amber","Vanille"],"Middlenotes":["Musk","Tonka Bean","Orange Blossom"],"Basenotes":["Myrrh","Saffron","Leather"]},
             "launch":2006,
             "concentration":"Eau de Parfum",
-            "rating":4.1,
-            "reviews": 13,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             },
             {
@@ -193,8 +193,8 @@ const data = {
             "notes":{"Topnotes":["Neroli","Cardamom","Bergamot"],"Middlenotes":["Myrrh","Musk","Orange Blossom"],"Basenotes":["Saffron","Labdanum","Leather"]},
             "launch":2006,
             "concentration":"Eau de toilette",
-            "rating":2.5,
-            "reviews": 6,
+            "rating":0,
+            "numReviews": 0,
             "stockcount":10
             }
     ]
