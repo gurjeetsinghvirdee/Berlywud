@@ -38,7 +38,7 @@ function Orderdetails() {
     const { userInfo } = UserSignin
 
     const orderDeliver = useSelector((state) => state.OrderDeliver);
-    const {loading: loadingDeliver,error: errorDeliver,success: successDeliver,} = orderDeliver;
+  const {loading: loadingDeliver,error: errorDeliver,success: successDeliver,} = orderDeliver;
 
     const orderPay = useSelector((state) => state.orderPay);
     const {loading: loadingPay,error: errorPay,success: successPay} = orderPay;
@@ -100,8 +100,8 @@ function Orderdetails() {
                 }
             },
             "prefill": {
-                "name": "name",
-                "email": "@gmail.com",
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
                 "contact": "9999999999"  
             }
         };
