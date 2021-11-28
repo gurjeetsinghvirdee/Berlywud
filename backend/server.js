@@ -9,7 +9,7 @@ const Razorpay= require('razorpay')
 const multer = require('multer')
 const restAuth = require('./utils').restAuth
 
-
+dotenv.config()
 
 const razorpayPublicKey = "rzp_test_tjgqJf8OgEA215"
 const razorpaySecretKey = "0wIdYCiuPh7ydfOwhvTKyKEP"
