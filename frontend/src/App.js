@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
-import Navbar from './Navbar'
-
-import Home from './Home'
+import Navbar from './Navbar';
+import Home from './Home';
 import Cart from './Cart';
 import Footer from './Footer'
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
